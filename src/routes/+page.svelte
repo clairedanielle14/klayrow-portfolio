@@ -1,6 +1,7 @@
 <script>
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
+  import ImageModal from '$lib/components/ImageModal.svelte';
   import { skills, navLinks, projectCards, timeline } from '$lib/portfolio';
 
   const storageKey = 'heavy-serenade-theme';
@@ -19,6 +20,8 @@
   let scrollRatio = $state(0);
   let isHeaderElevated = $state(false);
   let isMobileMenuOpen = $state(false);
+  let activeProjectImage = $state(null);
+  let projectCarouselIndexes = $state({});
 
   function applyTheme(nextTheme) {
     theme = nextTheme === 'dark' ? 'dark' : 'light';
@@ -39,6 +42,82 @@
 
   function closeMobileMenu() {
     isMobileMenuOpen = false;
+  }
+
+  function openProjectImage(project) {
+    const images = getProjectImages(project);
+
+    if (!images.length) return;
+
+    const activeIndex = getProjectImageIndex(project);
+
+    activeProjectImage = {
+      ...images[activeIndex],
+      title: project.title,
+      index: activeIndex,
+      projectTitle: project.title
+    };
+  }
+
+  function closeProjectImage() {
+    activeProjectImage = null;
+  }
+
+  function getProjectImages(project) {
+    if (project.images?.length) {
+      return project.images;
+    }
+
+    if (project.image) {
+      return [project.image];
+    }
+
+    return [];
+  }
+
+  function getProjectImageIndex(project) {
+    return projectCarouselIndexes[project.title] ?? 0;
+  }
+
+  function setProjectImageIndex(project, nextIndex) {
+    const images = getProjectImages(project);
+
+    if (!images.length) return;
+
+    const normalizedIndex = (nextIndex + images.length) % images.length;
+    projectCarouselIndexes[project.title] = normalizedIndex;
+    projectCarouselIndexes = { ...projectCarouselIndexes };
+
+    if (activeProjectImage?.projectTitle === project.title) {
+      activeProjectImage = {
+        ...images[normalizedIndex],
+        title: project.title,
+        index: normalizedIndex,
+        projectTitle: project.title
+      };
+    }
+  }
+
+  function showPreviousProjectImage(event, project) {
+    event.stopPropagation();
+    setProjectImageIndex(project, getProjectImageIndex(project) - 1);
+  }
+
+  function showNextProjectImage(event, project) {
+    event.stopPropagation();
+    setProjectImageIndex(project, getProjectImageIndex(project) + 1);
+  }
+
+  function showPreviousModalImage() {
+    const project = projectCards.find((item) => item.title === activeProjectImage?.projectTitle);
+    if (!project) return;
+    setProjectImageIndex(project, getProjectImageIndex(project) - 1);
+  }
+
+  function showNextModalImage() {
+    const project = projectCards.find((item) => item.title === activeProjectImage?.projectTitle);
+    if (!project) return;
+    setProjectImageIndex(project, getProjectImageIndex(project) + 1);
   }
 
   function updateScrollState() {
@@ -69,6 +148,7 @@
     const handleKeydown = (event) => {
       if (event.key === 'Escape') {
         closeMobileMenu();
+        closeProjectImage();
       }
     };
 
@@ -356,58 +436,13 @@
       </div>
     </section>
 
-    <section id="about" class="surface-section px-6 py-6 md:px-8">
-      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div class="section-label">Track 01 - About</div>
-        <h2 class="display-title">A quick note on the person behind the portfolio.</h2>
-      </div>
-
-      <div class="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <article
-          class="reveal rounded-[32px] border p-7"
-          style:background="var(--surface-alt)"
-          style:border-color="var(--border-color)"
-        >
-          <h3 class="card-title mt-0 text-[1.9rem]">Who I am</h3>
-          <p class="mt-4 max-w-[42rem] leading-7">
-            I’m a full stack developer who likes turning clean structure into something that feels
-            personal, expressive, and useful. My work usually sits somewhere between product
-            thinking and visual storytelling.
-          </p>
-          <p class="mt-4 max-w-[42rem] leading-7">
-            I enjoy building interfaces with strong rhythm, clear hierarchy, and enough character
-            to stand out without losing clarity.
-          </p>
-        </article>
-
-        <article
-          class="reveal reveal-delay rounded-[32px] border p-7"
-          style:background="var(--surface-alt)"
-          style:border-color="var(--border-color)"
-        >
-          <h3 class="card-title mt-0 text-[1.9rem]">What I focus on</h3>
-          <div class="mt-4 grid gap-3">
-            <div class="rounded-2xl border px-4 py-3" style:border-color="var(--border-color)">
-              Responsive layouts that feel deliberate on every screen
-            </div>
-            <div class="rounded-2xl border px-4 py-3" style:border-color="var(--border-color)">
-              Reusable systems that make future work easier
-            </div>
-            <div class="rounded-2xl border px-4 py-3" style:border-color="var(--border-color)">
-              Interfaces with a clear voice and strong visual structure
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
     <section id="projects" class="surface-section px-6 py-6 md:px-8">
       <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div class="section-label">Track 02 - Works</div>
         <h2 class="display-title">Selected tracks from the portfolio.</h2>
       </div>
 
-      <div class="mt-6 grid gap-5 lg:grid-cols-4">
+      <div class="mt-6 grid gap-5 lg:grid-cols-3">
         {#each projectCards as project, index (project.title)}
           <article
             class={`project-card ${project.dark ? 'project-card-dark' : 'project-card-light'} ${index === 1 ? 'reveal reveal-delay' : 'reveal'} p-[22px]`}
@@ -417,14 +452,61 @@
               <span>{project.type}</span>
             </div>
             <h3 class="card-title mt-4 text-[1.9rem]">{project.title}</h3>
-            <p class="mt-3 leading-7">{project.description}</p>
-            <div class={`project-preview ${project.preview} mt-[18px] mb-[18px]`}></div>
-            <div class="flex flex-col gap-3 text-[0.92rem] md:flex-row md:items-center md:justify-between">
-              <span>Mood: {project.mood}</span>
-              <div class="flex gap-4">
-                <a class="no-underline hover:opacity-80" href="#contact">Live Demo</a>
-                <a class="no-underline hover:opacity-80" href="#contact">GitHub</a>
+            <p class="project-description mt-3 leading-7">{project.description}</p>
+            {#if getProjectImages(project).length}
+              <div class="project-preview-shell mt-[18px]">
+                <button
+                  class="project-preview-trigger"
+                  type="button"
+                  aria-label={`Open full preview for ${project.title}`}
+                  onclick={() => openProjectImage(project)}
+                >
+                  <div class={`project-preview ${project.preview}`}>
+                    <img
+                      class="project-preview-media"
+                      src={getProjectImages(project)[getProjectImageIndex(project)].src}
+                      alt={getProjectImages(project)[getProjectImageIndex(project)].alt}
+                      loading="lazy"
+                    />
+                  </div>
+                </button>
+
+                {#if getProjectImages(project).length > 1}
+                  <div class="project-preview-nav">
+                    <button
+                      class="project-preview-nav__button"
+                      type="button"
+                      aria-label={`Show previous ${project.title} image`}
+                      onclick={(event) => showPreviousProjectImage(event, project)}
+                    >
+                      <span aria-hidden="true">&#8249;</span>
+                    </button>
+                    <button
+                      class="project-preview-nav__button"
+                      type="button"
+                      aria-label={`Show next ${project.title} image`}
+                      onclick={(event) => showNextProjectImage(event, project)}
+                    >
+                      <span aria-hidden="true">&#8250;</span>
+                    </button>
+                  </div>
+                {/if}
               </div>
+            {:else}
+              <div class={`project-preview ${project.preview} mt-[18px]`}></div>
+            {/if}
+            <div class="project-stack-row mt-5">
+              <p class="project-stack">{project.stack}</p>
+              {#if project.liveSite}
+                <a
+                  class="project-live-link"
+                  href={project.liveSite}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Live site
+                </a>
+              {/if}
             </div>
           </article>
         {/each}
@@ -565,3 +647,15 @@
     <p>All rights reserved.</p>
   </footer>
 </div>
+
+{#if activeProjectImage}
+  <ImageModal
+    image={activeProjectImage}
+    onClose={closeProjectImage}
+    onPrevious={showPreviousModalImage}
+    onNext={showNextModalImage}
+    canNavigate={Boolean(
+      projectCards.find((item) => item.title === activeProjectImage.projectTitle)?.images?.length > 1
+    )}
+  />
+{/if}

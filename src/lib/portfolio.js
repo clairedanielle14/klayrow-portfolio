@@ -1,5 +1,5 @@
 export const navLinks = [
-  { href: '#about', label: 'About' },
+  { href: '#top', label: 'About' },
   { href: '#projects', label: 'Works' },
   { href: '#skills', label: 'Skills' },
   { href: '#path', label: 'Career Path' },
@@ -8,35 +8,49 @@ export const navLinks = [
 
 export const projectCards = [
   {
-    title: 'Editorial Commerce',
-    time: '03:42',
-    type: 'Frontend Build',
-    mood: 'bold and fluid',
+    title: "Bijoux",
+    time: "03:42",
+    type: "Web Development",
+    stack: 'HTML - CSS - PHP - JAVASCRIPT - JQUERY',
     description:
-      'A storefront concept with cinematic typography, layered product storytelling, and a conversion flow that still feels tactile.',
-    preview: 'preview-wave',
+      "Bijoux is an e-commerce website where users can create an account to browse and buy products like sunglasses, rings,earrings, bracelets etc. They can also add to cart a product, edit the quantity and delete it from the cart. ",
+    preview: "preview-wave",
+    image: {
+      src: '/projects/bijoux.png',
+      alt: 'Bijoux jewelry website homepage preview'
+    },
+    dark: true,
+  },
+  {
+    title: "Photobooth",
+    time: "02:58",
+    type: "Web Development",
+    stack: "SVELTE - NODEJS",
+    description: "Klayrow's Photobooth is a simple web photobooth that allows users to take photos with various filters and effects (in progress :P).",
+    preview: "preview-grid",
+    liveSite: "https://classy-custard-ad75ee.netlify.app/",
+    images: [
+      {
+        src: '/projects/pb1.png',
+        alt: 'Photobooth app preview one'
+      },
+      {
+        src: '/projects/pb2.png',
+        alt: 'Photobooth app preview two'
+      }
+    ],
     dark: true
   },
   {
-    title: 'Soft Utility Dashboard',
-    time: '02:58',
-    type: 'UI System',
-    mood: 'soft interactive',
+    title: "SKonnect",
+    time: "04:11",
+    type: "Web Development",
+    stack: 'REACTJS - LARAVEL - MYSQL',
     description:
-      'A design system exercise built around pastel states, clean data framing, and subtle motion that guides the eye.',
-    preview: 'preview-grid',
-    dark: false
+      "SKonnect is a Project Management and Monitoring Tool for SK where Sangguniang Kabataan Users can create events and monitor existing projects to ensure that they are on track with the project timeline.",
+    preview: "preview-orbit",
+    dark: true,
   },
-  {
-    title: 'Album Notes Resume',
-    time: '04:11',
-    type: 'Creative Portfolio',
-    mood: 'personal editorial',
-    description:
-      'A personal site concept that turns achievements, experience, and contact details into a cohesive liner-note narrative.',
-    preview: 'preview-card',
-    dark: false
-  }
 ];
 
 export const skills = [
