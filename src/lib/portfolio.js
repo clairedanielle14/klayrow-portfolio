@@ -16,7 +16,7 @@ export const projectCards = [
       "Bijoux is an e-commerce website where users can create an account to browse and buy products like sunglasses, rings,earrings, bracelets etc. They can also add to cart a product, edit the quantity and delete it from the cart. ",
     preview: "preview-wave",
     image: {
-      src: '/projects/bijoux.png',
+      src: 'projects/bijoux.png',
       alt: 'Bijoux jewelry website homepage preview'
     },
     dark: true,
@@ -31,11 +31,11 @@ export const projectCards = [
     liveSite: "https://classy-custard-ad75ee.netlify.app/",
     images: [
       {
-        src: '/projects/pb1.png',
+        src: 'projects/pb1.png',
         alt: 'Photobooth app preview one'
       },
       {
-        src: '/projects/pb2.png',
+        src: 'projects/pb2.png',
         alt: 'Photobooth app preview two'
       }
     ],

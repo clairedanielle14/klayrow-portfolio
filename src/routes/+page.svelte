@@ -1,5 +1,6 @@
 <script>
   import { browser } from '$app/environment';
+  import { base } from '$app/paths';
   import { onMount } from 'svelte';
   import ImageModal from '$lib/components/ImageModal.svelte';
   import { skills, navLinks, projectCards, timeline } from '$lib/portfolio';
@@ -63,13 +64,26 @@
     activeProjectImage = null;
   }
 
+  function resolveProjectAssetPath(path) {
+    if (!path) return path;
+    return `${base}/${path}`.replace(/\/{2,}/g, '/');
+  }
+
   function getProjectImages(project) {
     if (project.images?.length) {
-      return project.images;
+      return project.images.map((image) => ({
+        ...image,
+        src: resolveProjectAssetPath(image.src)
+      }));
     }
 
     if (project.image) {
-      return [project.image];
+      return [
+        {
+          ...project.image,
+          src: resolveProjectAssetPath(project.image.src)
+        }
+      ];
     }
 
     return [];
