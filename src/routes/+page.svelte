@@ -356,6 +356,51 @@
       </div>
     </section>
 
+    <section id="about" class="surface-section px-6 py-6 md:px-8">
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div class="section-label">Track 01 - About</div>
+        <h2 class="display-title">A quick note on the person behind the portfolio.</h2>
+      </div>
+
+      <div class="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <article
+          class="reveal rounded-[32px] border p-7"
+          style:background="var(--surface-alt)"
+          style:border-color="var(--border-color)"
+        >
+          <h3 class="card-title mt-0 text-[1.9rem]">Who I am</h3>
+          <p class="mt-4 max-w-[42rem] leading-7">
+            I’m a full stack developer who likes turning clean structure into something that feels
+            personal, expressive, and useful. My work usually sits somewhere between product
+            thinking and visual storytelling.
+          </p>
+          <p class="mt-4 max-w-[42rem] leading-7">
+            I enjoy building interfaces with strong rhythm, clear hierarchy, and enough character
+            to stand out without losing clarity.
+          </p>
+        </article>
+
+        <article
+          class="reveal reveal-delay rounded-[32px] border p-7"
+          style:background="var(--surface-alt)"
+          style:border-color="var(--border-color)"
+        >
+          <h3 class="card-title mt-0 text-[1.9rem]">What I focus on</h3>
+          <div class="mt-4 grid gap-3">
+            <div class="rounded-2xl border px-4 py-3" style:border-color="var(--border-color)">
+              Responsive layouts that feel deliberate on every screen
+            </div>
+            <div class="rounded-2xl border px-4 py-3" style:border-color="var(--border-color)">
+              Reusable systems that make future work easier
+            </div>
+            <div class="rounded-2xl border px-4 py-3" style:border-color="var(--border-color)">
+              Interfaces with a clear voice and strong visual structure
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section id="projects" class="surface-section px-6 py-6 md:px-8">
       <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div class="section-label">Track 02 - Works</div>
