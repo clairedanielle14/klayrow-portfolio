@@ -384,7 +384,7 @@
 
             <div class="flex flex-wrap gap-3.5">
               <a
-                class="rounded-full px-5 py-3 font-bold no-underline"
+                class="hero-cta hero-cta--primary rounded-full px-5 py-3 font-bold no-underline"
                 href="#projects"
                 style:background="var(--button-primary-bg)"
                 style:color="var(--button-primary-text)"
@@ -392,7 +392,7 @@
                 View Works
               </a>
               <a
-                class="rounded-full border px-5 py-3 font-bold no-underline"
+                class="hero-cta hero-cta--secondary rounded-full border px-5 py-3 font-bold no-underline"
                 href="#contact"
                 style:border-color="var(--button-secondary-border)"
                 style:color="var(--button-secondary-text)"
@@ -401,21 +401,6 @@
               </a>
             </div>
 
-            <div
-              class="mt-7 grid max-w-[28.75rem] gap-3 rounded-[24px] border px-4 py-4 "
-              style:border-color="var(--hero-border)"
-              style:background="rgba(255, 255, 255, 0.06)"
-            >
-              <div>
-                <span class="mini-label text-white/70">Now Playing</span>
-                <strong class="mt-1 block">Designing poetic, responsive web experiences</strong>
-              </div>
-              <div class="flex flex-wrap gap-2.5">
-                <span class="soft-pill px-3.5 py-2">UI Systems</span>
-                <span class="soft-pill px-3.5 py-2">Creative Frontend</span>
-                <span class="soft-pill px-3.5 py-2">Svelte Ready</span>
-              </div>
-            </div>
           </div>
 
           <div class="reveal reveal-delay relative min-h-[620px] max-lg:min-h-[560px] max-md:min-h-[510px]">
