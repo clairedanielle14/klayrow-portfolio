@@ -72,16 +72,17 @@ export const timeline = [
   {
     year: '2026',
     role: 'Full Stack Developer',
-    description: 'Built polished product flows and reusable frontend systems.'
+    description: 'Maintain and develop reusable frontend and backend system.'
   },
   {
     year: '2025',
-    role: 'Frontend Developer',
-    description: 'Shaped responsive landing pages and component libraries.'
+    role: 'IT Project and QA Intern',
+    description:
+      'Assist in testing website and ensuring standard requirements are met as well as communicating with department with software concerns.'
   },
   {
-    year: '2024',
-    role: 'UI Designer',
-    description: 'Designed visual systems for brand-forward digital products.'
+    year: '2025',
+    role: 'Database Management Intern',
+    description: 'Assist in database cleansing, creating report and creating SQL query scripts.'
   }
 ];

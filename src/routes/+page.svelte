@@ -16,18 +16,20 @@
       aria: 'Switch to light mode'
     }
   };
+  const heroPortraitSrc = resolveProjectAssetPath('hero/claire-portrait.png');
 
   let theme = $state('light');
-  let scrollRatio = $state(0);
   let isHeaderElevated = $state(false);
   let isMobileMenuOpen = $state(false);
   let activeProjectImage = $state(null);
   let projectCarouselIndexes = $state({});
+  let pageShell;
 
   function applyTheme(nextTheme) {
     theme = nextTheme === 'dark' ? 'dark' : 'light';
 
     if (browser) {
+      document.documentElement.dataset.theme = theme;
       document.body.dataset.theme = theme;
       localStorage.setItem(storageKey, theme);
     }
@@ -137,9 +139,18 @@
   function updateScrollState() {
     const scrollTop = window.scrollY || window.pageYOffset;
     const scrollMax = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+    const nextScrollRatio = Math.min(scrollTop / scrollMax, 1);
+    const nextHeaderElevated = scrollTop > 8;
 
-    scrollRatio = Math.min(scrollTop / scrollMax, 1);
-    isHeaderElevated = scrollTop > 8;
+    if (pageShell) {
+      pageShell.style.setProperty('--scroll-ratio', nextScrollRatio.toFixed(4));
+      pageShell.style.setProperty('--parallax-shift', `${(nextScrollRatio * 180).toFixed(1)}px`);
+      pageShell.style.setProperty('--parallax-drift', `${(nextScrollRatio * 72).toFixed(1)}px`);
+    }
+
+    if (isHeaderElevated !== nextHeaderElevated) {
+      isHeaderElevated = nextHeaderElevated;
+    }
   }
 
   onMount(() => {
@@ -199,8 +210,8 @@
 </svelte:head>
 
 <div
+  bind:this={pageShell}
   class="page-shell"
-  style={`--scroll-ratio:${scrollRatio.toFixed(4)}; --parallax-shift:${(scrollRatio * 180).toFixed(1)}px; --parallax-drift:${(scrollRatio * 72).toFixed(1)}px;`}
 >
   <div class="page-ambience" aria-hidden="true">
     <div class="page-ambience__wash"></div>
@@ -408,43 +419,33 @@
           </div>
 
           <div class="reveal reveal-delay relative min-h-[620px] max-lg:min-h-[560px] max-md:min-h-[510px]">
-            <div class="stage-main" aria-hidden="true"></div>
-
-            <div class="hero-card left-0 top-[124px] flex w-[240px] items-center gap-4 rounded-[22px] p-4 max-md:top-0 max-md:w-[220px]">
-              <span class="avatar-glow" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                  <path
-                    d="M14 5v9.1"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.9"
-                  />
-                  <path
-                    d="M14 5l6-1.6v7.2"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.9"
-                  />
-                  <circle cx="10" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="1.9" />
-                  <circle cx="20" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="1.9" />
+            <div class="stage-main">
+              <div class="stage-main__portrait-shell">
+                <div class="stage-main__portrait-bg" aria-hidden="true"></div>
+                <svg
+                  class="stage-main__ring"
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <linearGradient id="hero-ring-gradient" x1="10%" y1="10%" x2="90%" y2="90%">
+                      <stop offset="0%" style:stop-color="var(--hero-ring-start)" />
+                      <stop offset="48%" style:stop-color="var(--hero-ring-middle)" />
+                      <stop offset="100%" style:stop-color="var(--hero-ring-end)" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="50" cy="50" r="46" />
                 </svg>
-              </span>
-              <div>
-                <strong>Creative Direction</strong>
-                <p class="mt-1 text-sm leading-6">collage layouts / soft interactions / music cues</p>
+                <div class="stage-main__portrait">
+                  <img
+                    class="stage-main__portrait-image"
+                    src={heroPortraitSrc}
+                    alt="Portrait of Claire Danielle"
+                  />
+                </div>
               </div>
             </div>
-
-
-            <div class="hero-card right-0 top-[238px] w-[196px] p-5 max-md:top-[162px]">
-              <p class="mini-label">Diary Fragment</p>
-              <strong class="mt-2 block leading-7">Build pages that hold emotion, not just information.</strong>
-            </div>
-
           </div>
         </div>
       </div>
@@ -571,7 +572,7 @@
         >
           <h3 class="card-title mt-0 text-[1.9rem]">Experience</h3>
           <ul class="m-0 list-none p-0">
-            {#each timeline as item (item.year)}
+            {#each timeline as item (`${item.year}-${item.role}`)}
               <li class="grid gap-4 border-b py-[18px] last:border-b-0 last:pb-0 md:grid-cols-[84px_1fr]" style:border-color="var(--border-color)">
                 <span class="font-extrabold" style:color="var(--accent-main)">{item.year}</span>
                 <div>
@@ -594,16 +595,6 @@
               <span class="mini-label">Education</span>
               <strong class="mt-1 block">Course / School / Year</strong>
               <p class="mt-1 leading-7">Replace this with your program, specialization, or bootcamp.</p>
-            </div>
-            <div>
-              <span class="mini-label">Certifications</span>
-              <strong class="mt-1 block">Certification Name / Year</strong>
-              <p class="mt-1 leading-7">Add the credentials that support your strongest work.</p>
-            </div>
-            <div>
-              <span class="mini-label">Specialty</span>
-              <strong class="mt-1 block">Creative frontend with production discipline</strong>
-              <p class="mt-1 leading-7">Best for portfolio builds, landing pages, and branded interfaces.</p>
             </div>
           </div>
         </article>
