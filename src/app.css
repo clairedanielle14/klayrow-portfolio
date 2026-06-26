@@ -170,6 +170,7 @@ a {
   --scroll-ratio: 0;
   --parallax-shift: 0px;
   --parallax-drift: 0px;
+  --page-gutter: 1.5rem;
   position: relative;
   isolation: isolate;
   width: min(100%, 1380px);
@@ -989,6 +990,7 @@ a {
 @media (max-width: 760px) {
   .page-shell {
     width: 100%;
+    --page-gutter: 1.25rem;
     padding-top: 0;
   }
 
@@ -1008,7 +1010,7 @@ a {
 
   .glass-header__inner {
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0.5rem var(--page-gutter);
   }
 
   .hero-title {
@@ -1054,7 +1056,7 @@ a {
 
   .glass-header__inner {
     gap: 1rem;
-    padding: 0.75rem 0;
+    padding: 0.75rem var(--page-gutter);
   }
 
   .header-nav {
@@ -1078,7 +1080,7 @@ a {
     display: grid;
     grid-template-rows: 0fr;
     overflow: hidden;
-    width: min(100% - 2rem, 1380px);
+    width: min(100% - (var(--page-gutter) * 2), 1380px);
     margin: 0 auto;
     border-top: 1px solid transparent;
     opacity: 0;
@@ -1145,7 +1147,7 @@ a {
 
 @media (max-width: 760px) {
   .mobile-menu {
-    width: 100%;
+    width: calc(100% - (var(--page-gutter) * 2));
   }
 }
 

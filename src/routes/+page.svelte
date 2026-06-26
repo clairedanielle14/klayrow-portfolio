@@ -366,25 +366,25 @@
     </div>
   </header>
 
-  <main id="top" class="space-y-7">
-    <section class="surface-section hero-panel staff-section py-7">
-      <div class="hero-trackbar relative z-[1] px-6 md:px-8">
+  <main id="top" class="space-y-5 sm:space-y-7">
+    <section class="surface-section hero-panel staff-section py-6 sm:py-7">
+      <div class="hero-trackbar relative z-[1] px-5 sm:px-6 md:px-8">
         <span class="section-label text-white/80">Track 01 - Know About Me</span>
         <span class="hero-trackbar-line" aria-hidden="true"></span>
       </div>
 
-      <div class="px-6 md:px-8">
-        <div class="relative z-[1] grid gap-6 pt-4 lg:grid-cols-[1.08fr_0.92fr]">
-          <div class="reveal flex flex-col justify-center px-1 py-4">
+      <div class="px-5 sm:px-6 md:px-8">
+        <div class="relative z-[1] grid gap-5 pt-3 sm:gap-6 sm:pt-4 lg:grid-cols-[1.08fr_0.92fr]">
+          <div class="reveal flex flex-col justify-center py-3 sm:px-1 sm:py-4">
             <p class="eyebrow hero-subtle">Frontend developer</p>
-            <h1 class="hero-title my-3">Hi, <span class="text-8xl">I'm Claire!</span></h1>
-            <p class="hero-subtle mb-6 max-w-[35rem] text-[1.08rem] leading-7">
+            <h1 class="hero-title my-3">Hi, <span class="text-[4.5rem] sm:text-8xl">I'm Claire!</span></h1>
+            <p class="hero-subtle mb-5 max-w-[35rem] text-[1rem] leading-7 sm:mb-6 sm:text-[1.08rem]">
               I am a Full Stack Developer based in Philippines who loves creating aesthetic and functional website. I enjoy incorporating my hobbies and interest into my work, and I am always looking for new ways to push the boundaries of web design and development.
             </p>
 
-            <div class="flex flex-wrap gap-3.5">
+            <div class="flex flex-wrap gap-3">
               <a
-                class="hero-cta hero-cta--primary rounded-full px-5 py-3 font-bold no-underline"
+                class="hero-cta hero-cta--primary rounded-full px-4 py-3 text-sm font-bold no-underline sm:px-5 sm:text-base"
                 href="#projects"
                 style:background="var(--button-primary-bg)"
                 style:color="var(--button-primary-text)"
@@ -392,7 +392,7 @@
                 View Works
               </a>
               <a
-                class="hero-cta hero-cta--secondary rounded-full border px-5 py-3 font-bold no-underline"
+                class="hero-cta hero-cta--secondary rounded-full border px-4 py-3 text-sm font-bold no-underline sm:px-5 sm:text-base"
                 href="#contact"
                 style:border-color="var(--button-secondary-border)"
                 style:color="var(--button-secondary-text)"
@@ -403,7 +403,7 @@
 
           </div>
 
-          <div class="reveal reveal-delay relative min-h-[620px] max-lg:min-h-[560px] max-md:min-h-[510px]">
+          <div class="reveal reveal-delay relative min-h-[440px] sm:min-h-[520px] lg:min-h-[620px]">
             <div class="stage-main">
               <div class="stage-main__portrait-shell">
                 <div class="stage-main__portrait-bg" aria-hidden="true"></div>
@@ -436,16 +436,16 @@
       </div>
     </section>
 
-    <section id="projects" class="surface-section px-6 py-6 md:px-8">
+    <section id="projects" class="surface-section px-5 py-5 sm:px-6 sm:py-6 md:px-8">
       <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div class="section-label">Track 02 - Works</div>
         <h2 class="display-title">Selected tracks from the portfolio.</h2>
       </div>
 
-      <div class="mt-6 grid gap-5 lg:grid-cols-3">
+      <div class="mt-5 grid gap-4 sm:mt-6 sm:gap-5 lg:grid-cols-3">
         {#each projectCards as project, index (project.title)}
           <article
-            class={`project-card ${project.dark ? 'project-card-dark' : 'project-card-light'} ${index === 1 ? 'reveal reveal-delay' : 'reveal'} p-[22px]`}
+            class={`project-card ${project.dark ? 'project-card-dark' : 'project-card-light'} ${index === 1 ? 'reveal reveal-delay' : 'reveal'} p-5 sm:p-[22px]`}
           >
             <div class="project-topline flex items-center justify-between gap-4">
               <span>{project.time}</span>
@@ -513,16 +513,16 @@
       </div>
     </section>
 
-    <section id="skills" class="surface-section staff-section px-6 py-6 md:px-8">
+    <section id="skills" class="surface-section staff-section px-5 py-5 sm:px-6 sm:py-6 md:px-8">
       <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div class="section-label font-bold">Track 03 - Skills</div>
         <h2 class="display-title">Studio tools behind the sound.</h2>
       </div>
 
-      <div class="mt-6 grid gap-5 lg:grid-cols-3">
+      <div class="mt-5 grid gap-4 sm:mt-6 sm:gap-5 lg:grid-cols-3">
         {#each skills as credit, index (credit.heading)}
           <article
-            class={`${index === 1 ? 'reveal reveal-delay' : 'reveal'} rounded-[32px] border p-7`}
+            class={`${index === 1 ? 'reveal reveal-delay' : 'reveal'} rounded-[32px] border p-5 sm:p-7`}
             style:border-color="var(--border-color)"
             style:background="linear-gradient(180deg, var(--surface-main), var(--surface-alt))"
           >
@@ -543,15 +543,15 @@
       </div>
     </section>
 
-    <section id="path" class="surface-section px-6 py-6 md:px-8">
+    <section id="path" class="surface-section px-5 py-5 sm:px-6 sm:py-6 md:px-8">
       <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div class="section-label">Track 04 - Career Path</div>
         <h2 class="display-title">Experience arranged like a booklet.</h2>
       </div>
 
-      <div class="mt-6 grid gap-6 lg:grid-cols-2">
+      <div class="mt-5 grid gap-5 sm:mt-6 sm:gap-6 lg:grid-cols-2">
         <article
-          class="reveal rounded-[32px] border p-7"
+          class="reveal rounded-[32px] border p-5 sm:p-7"
           style:background="var(--surface-alt)"
           style:border-color="var(--border-color)"
         >
@@ -570,7 +570,7 @@
         </article>
 
         <article
-          class="reveal reveal-delay rounded-[32px] border p-7"
+          class="reveal reveal-delay rounded-[32px] border p-5 sm:p-7"
           style:background="var(--surface-alt)"
           style:border-color="var(--border-color)"
         >
@@ -578,17 +578,20 @@
           <div class="grid gap-[22px]">
             <div>
               <span class="mini-label">Education</span>
-              <strong class="mt-1 block">Course / School / Year</strong>
-              <p class="mt-1 leading-7">Replace this with your program, specialization, or bootcamp.</p>
+              <strong class="mt-1 block">Bachelor of Science in Information Technology / TIP QC / 2025</strong>
+              <p class="mt-1 leading-7">
+                My interest is in creating web and mobile applications, specializing in game
+                development during my college years. I like adding creative touches to any work I do.
+              </p>
             </div>
           </div>
         </article>
       </div>
     </section>
 
-    <section id="contact" class="surface-section contact-panel staff-section px-6 py-6 md:px-8">
+    <section id="contact" class="surface-section contact-panel staff-section px-5 py-5 sm:px-6 sm:py-6 md:px-8">
       <div class="section-label relative z-[1] text-white/80">Track 05 - Encore</div>
-      <div class="relative z-[1] grid min-h-[320px] gap-6 pt-4 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <div class="relative z-[1] grid min-h-[320px] gap-5 pt-3 sm:gap-6 sm:pt-4 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
         <div class="reveal">
           <p class="eyebrow text-white/70">Let's make something sound good.</p>
           <h2 class="display-title mt-2">Design with feeling. Build with precision.</h2>
@@ -632,7 +635,7 @@
     </section>
   </main>
 
-  <footer class="flex flex-col gap-3 px-0.5 pt-2 text-[0.92rem] md:flex-row md:justify-between" style:color="var(--muted-color)">
+  <footer class="flex flex-col gap-3 px-5 pt-2 text-[0.92rem] sm:px-1 md:flex-row md:justify-between" style:color="var(--muted-color)">
     <p>Inspired by my love with NMIXX</p>
     <p>All rights reserved.</p>
   </footer>
