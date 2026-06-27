@@ -3,6 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        const storageKey = 'heavy-serenade-theme';
+        const savedTheme = localStorage.getItem(storageKey);
+        const theme = savedTheme === 'dark' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link
@@ -12,6 +20,9 @@
     %sveltekit.head%
   </head>
   <body data-theme="light" data-sveltekit-preload-data="hover">
+    <script>
+      document.body.dataset.theme = document.documentElement.dataset.theme || 'light';
+    </script>
     <div style="display: contents">%sveltekit.body%</div>
   </body>
 </html>
