@@ -358,7 +358,7 @@
   <main id="top" class="space-y-7">
     <section class="surface-section hero-panel staff-section py-7">
       <div class="hero-trackbar relative z-[1] px-6 md:px-8">
-        <span class="section-label text-white/80">Track 01 - Know About Me</span>
+        <span class="section-label text-white/80">Track 01 - Sample About Me</span>
         <span class="hero-trackbar-line" aria-hidden="true"></span>
       </div>
 
@@ -560,7 +560,7 @@
     <section id="path" class="surface-section px-6 py-6 md:px-8">
       <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div class="section-label">Track 04 - Career Path</div>
-        <h2 class="display-title">Experience arranged like a booklet.</h2>
+        <h2 class="display-title">Experiences along the journey</h2>
       </div>
 
       <div class="mt-6 grid gap-6 lg:grid-cols-2">
@@ -571,7 +571,7 @@
         >
           <h3 class="card-title mt-0 text-[1.9rem]">Experience</h3>
           <ul class="m-0 list-none p-0">
-            {#each timeline as item (item.year)}
+            {#each timeline as item (`${item.year}-${item.role}`)}
               <li class="grid gap-4 border-b py-[18px] last:border-b-0 last:pb-0 md:grid-cols-[84px_1fr]" style:border-color="var(--border-color)">
                 <span class="font-extrabold" style:color="var(--accent-main)">{item.year}</span>
                 <div>
@@ -592,18 +592,8 @@
           <div class="grid gap-[22px]">
             <div>
               <span class="mini-label">Education</span>
-              <strong class="mt-1 block">Course / School / Year</strong>
-              <p class="mt-1 leading-7">Replace this with your program, specialization, or bootcamp.</p>
-            </div>
-            <div>
-              <span class="mini-label">Certifications</span>
-              <strong class="mt-1 block">Certification Name / Year</strong>
-              <p class="mt-1 leading-7">Add the credentials that support your strongest work.</p>
-            </div>
-            <div>
-              <span class="mini-label">Specialty</span>
-              <strong class="mt-1 block">Creative frontend with production discipline</strong>
-              <p class="mt-1 leading-7">Best for portfolio builds, landing pages, and branded interfaces.</p>
+              <strong class="mt-1 block">Bachelor of Science in Information Technology / Technological Institute of the Philippines / 2021- 2025</strong>
+              <p class="mt-1 leading-7">BSIT Graduate with a strong foundation in web development and 3D animation specialization. I enjoy drawing and creating different designs that I could incorporate into my projects.</p>
             </div>
           </div>
         </article>
